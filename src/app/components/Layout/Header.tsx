@@ -1,8 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import { ShoppingCartSimple } from "@/app/components/Icons";
+import { checkUserAuth } from "@/hooks/useAuth";
 
 const Header = ({ className = "" }: { className?: String }) => {
+  const isAuth = checkUserAuth();
+
   return (
     <header className={`flex-shrink-0 ${className}`}>
       <nav className="flex items-center justify-between py-2">
@@ -13,10 +16,24 @@ const Header = ({ className = "" }: { className?: String }) => {
         </div>
         <div className="flex items-center [&>*]:px-4">
           <Link href="/shop">Shop</Link>
-          <Link href="/account">Account</Link>
-          <button>
-            <ShoppingCartSimple size={22} />
-          </button>
+
+          {isAuth ? (
+            <>
+              <Link href="/account">Account</Link>
+              <button>
+                <ShoppingCartSimple size={22} />
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className="py-[2px] mx-2 border border-gray-700 rounded-sm"
+              >
+                Login
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>
