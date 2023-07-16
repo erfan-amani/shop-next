@@ -1,6 +1,9 @@
 import "./globals.css";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
+import { setupAxios } from "@/utils/setupAxios";
+
+setupAxios();
 
 export const metadata = {
   title: "Shop Next",
