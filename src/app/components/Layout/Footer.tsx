@@ -4,7 +4,7 @@ import React from "react";
 const Footer = ({ className = "" }: { className?: String }) => {
   return (
     <footer className={`flex-shrink-0 ${className}`}>
-      <div className="border-t border-neutral-200 mt-20">
+      <div className="border-t border-neutral-200">
         <div className="py-6 flex items-center justify-between">
           <div>
             <Link href="/" className="font-semibold text-lg">
