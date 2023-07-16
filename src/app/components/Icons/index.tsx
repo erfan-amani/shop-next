@@ -1,5 +1,10 @@
 "use client";
 
-import { ShoppingCartSimple } from "phosphor-react";
+import {
+  ShoppingCartSimple,
+  EyeClosed,
+  Eye,
+  UserRectangle,
+} from "phosphor-react";
 
-export { ShoppingCartSimple };
+export { ShoppingCartSimple, EyeClosed, Eye, UserRectangle };
