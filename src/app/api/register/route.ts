@@ -2,6 +2,8 @@ import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { store } from "@/redux/store";
+import { authSlice } from "@/redux/slices/userSlice/slice";
 
 export const POST = async (req: any) => {
   try {
@@ -22,6 +24,9 @@ export const POST = async (req: any) => {
     );
 
     const { data, headers: returnedHeaders } = response || {};
+
+    store.dispatch(authSlice.actions.setUser(data.user));
+
     Object.keys(returnedHeaders).forEach(
       (key) => (resHeaders[key] = returnedHeaders[key])
     );

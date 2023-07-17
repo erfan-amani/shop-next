@@ -1,6 +1,8 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { store } from "@/redux/store";
+import { authSlice } from "@/redux/slices/userSlice/slice";
 
 export const POST = async (req: NextRequest) => {
   try {
@@ -24,6 +26,8 @@ export const POST = async (req: NextRequest) => {
     Object.keys(returnedHeaders).forEach(
       (key) => (resHeaders[key] = returnedHeaders[key])
     );
+
+    store.dispatch(authSlice.actions.setUser(data.user));
 
     return NextResponse.json(data, { headers: resHeaders });
   } catch (error: any) {

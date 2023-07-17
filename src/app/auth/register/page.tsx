@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthInput from "../components/AuthInput";
 import { UserRectangle } from "@/app/components/Icons";
 import { useForm } from "react-hook-form";
 import { nextAxios } from "@/utils/setupAxios";
 import Link from "next/link";
+import { authSlice } from "@/redux/slices/userSlice/slice";
+import { useDispatch, useSelector } from "@/redux/store";
+import { selectIsAuth } from "@/redux/slices/userSlice/selector";
+import { useRouter } from "next/navigation";
 
 type FormValues = {
   email: string;
@@ -19,8 +23,11 @@ const RegisterPage = () => {
     watch,
     formState: { errors },
   } = useForm<FormValues>();
+  const isAuth = useSelector(selectIsAuth);
+  const dispatch = useDispatch();
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
+  const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -28,11 +35,19 @@ const RegisterPage = () => {
         email: data.email,
         password: data.password,
       });
+
+      dispatch(authSlice.actions.setUser(res.data.user));
     } catch (error: any) {
       const message = error.response.data || "Something went wrong!";
       setError(message);
     }
   });
+
+  useEffect(() => {
+    if (!isAuth) {
+      router.replace("/");
+    }
+  }, [isAuth, router]);
 
   return (
     <div className="py-8">
