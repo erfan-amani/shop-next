@@ -1,10 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { ShoppingCartSimple } from "@/app/components/Icons";
-import { checkUserAuth } from "@/hooks/useAuth";
+import { store, useSelector } from "@/redux/store";
+import { selectIsAuth } from "@/redux/slices/userSlice/selector";
 
 const Header = ({ className = "" }: { className?: String }) => {
-  const isAuth = checkUserAuth();
+  const isAuth = useSelector(selectIsAuth);
 
   return (
     <header className={`flex-shrink-0 ${className}`}>
