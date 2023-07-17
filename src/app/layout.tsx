@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 import { setupAxios } from "@/utils/setupAxios";
+import Providers from "./components/Providers";
 
 setupAxios();
 
@@ -18,11 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen font-mono text-gray-700">
-        <Header className="px-4" />
+        <Providers>
+          <Header className="px-4" />
 
-        <main className="flex-grow container mx-auto my-5">{children}</main>
+          <main className="flex-grow container mx-auto my-5 px-4">
+            {children}
+          </main>
 
-        <Footer className="px-4" />
+          <Footer className="px-4" />
+        </Providers>
       </body>
     </html>
   );
