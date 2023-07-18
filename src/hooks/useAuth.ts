@@ -1,19 +1,32 @@
-import { cookies } from "next/headers";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { authSlice } from "@/redux/slices/userSlice/slice";
+import { nextAxios } from "@/utils/setupAxios";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-const checkUserAuth = () => {
-  const authCookie = cookies().get(
-    process.env.NEXT_PUBLIC_APP_COOKIE_NAME || ""
-  );
+const useAuth = (authCookie: RequestCookie | undefined) => {
+  const dispatch = useDispatch();
 
-  return !!authCookie?.value;
+  useEffect(() => {
+    const init = async () => {
+      if (authCookie?.value) {
+        try {
+          const response = await nextAxios.get(`api/account`, {
+            headers: {
+              Cookie:
+                authCookie?.name + "=" + decodeURIComponent(authCookie?.value),
+            },
+          });
+
+          dispatch(authSlice.actions.setUser(response));
+        } catch (error) {
+          dispatch(authSlice.actions.setUser(null));
+        }
+      }
+    };
+
+    init();
+  }, [authCookie?.name, authCookie?.value, dispatch]);
 };
 
-const useAuth = () => {
-  const authCookie = cookies().get(
-    process.env.NEXT_PUBLIC_APP_COOKIE_NAME || ""
-  );
-
-  return !!authCookie?.value;
-};
-
-export { useAuth, checkUserAuth };
+export { useAuth };
