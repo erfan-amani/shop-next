@@ -1,6 +1,7 @@
 import { SingleProductType } from "@/types/products";
 import Image from "next/image";
 import React from "react";
+import { Star } from "@/app/components/Icons";
 
 const getProduct = async (id: string) => {
   try {
@@ -40,7 +41,16 @@ const page = async ({ params, searchParams }: ItemProps) => {
         <div className="flex flex-col justify-between gap-4">
           <div>
             <h3 className="text-xl font-bold"> {data.title}</h3>
-            <h4 className="text-xl font-normal">${data.price}</h4>
+            <div className="flex gap-4 items-center">
+              <h4 className="text-xl font-normal">${data.price}</h4>
+              <div className="flex gap-1 items-center">
+                <Star className="text-yellow-400" weight="fill" size={15} />
+                <p className="text-xs">
+                  {data.rating.rate}
+                  <span className="opacity-70">({data.rating.count})</span>
+                </p>
+              </div>
+            </div>
 
             <p className="text-sm opacity-75 mt-4">{data.description}</p>
           </div>

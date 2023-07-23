@@ -2,6 +2,7 @@ import { SingleProductType } from "@/types/products";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Star } from "@/app/components/Icons";
 
 const SingleProduct = ({ data }: { data: SingleProductType }) => {
   return (
@@ -20,8 +21,13 @@ const SingleProduct = ({ data }: { data: SingleProductType }) => {
         <div className="flex flex-col justify-between border border-gray-700 border-t-0 flex-grow [&>*]:px-2 [&>*]:py-1">
           <h2 className="line-clamp-3 text-sm">{data.title}</h2>
 
-          <div>
+          <div className="flex justify-between">
             <p>${data.price}</p>
+
+            <div className="flex gap-1 items-center">
+              <Star className="text-yellow-400" weight="fill" />
+              <p className="text-sm">{data.rating.rate}</p>
+            </div>
           </div>
         </div>
       </div>

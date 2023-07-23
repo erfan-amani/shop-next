@@ -6,6 +6,7 @@ import {
   Eye,
   UserRectangle,
   UserCircle,
+  Star,
 } from "phosphor-react";
 
-export { ShoppingCartSimple, EyeClosed, Eye, UserRectangle, UserCircle };
+export { ShoppingCartSimple, EyeClosed, Eye, UserRectangle, UserCircle, Star };
