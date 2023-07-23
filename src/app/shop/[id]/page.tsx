@@ -27,7 +27,7 @@ const page = async ({ params, searchParams }: ItemProps) => {
 
   return (
     <div className="my-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
         <div className="relative w-full before:pt-[60%] before:block">
           <Image
             src={data.image}
