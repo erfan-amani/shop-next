@@ -5,6 +5,7 @@ import {
   EyeClosed,
   Eye,
   UserRectangle,
+  UserCircle,
 } from "phosphor-react";
 
-export { ShoppingCartSimple, EyeClosed, Eye, UserRectangle };
+export { ShoppingCartSimple, EyeClosed, Eye, UserRectangle, UserCircle };
