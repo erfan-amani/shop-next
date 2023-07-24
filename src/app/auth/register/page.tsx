@@ -44,7 +44,7 @@ const RegisterPage = () => {
   });
 
   useEffect(() => {
-    if (!isAuth) {
+    if (isAuth) {
       router.replace("/");
     }
   }, [isAuth, router]);
