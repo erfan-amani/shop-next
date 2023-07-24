@@ -6,7 +6,7 @@ import { Star } from "@/app/components/Icons";
 
 const SingleProduct = ({ data }: { data: SingleProductType }) => {
   return (
-    <Link href={`/shop/${data.id}`} className="">
+    <Link href={`/shop/${data._id}`} className="">
       <div className="flex flex-col h-full">
         <div className="relative h-[200px] w-full border border-gray-600">
           <Image

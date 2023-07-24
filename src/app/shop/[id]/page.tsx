@@ -6,7 +6,7 @@ import { Star } from "@/app/components/Icons";
 const getProduct = async (id: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SHOP_API_BASE_URL}/products/${id}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/product/${id}`,
       { cache: "no-cache" }
     );
 

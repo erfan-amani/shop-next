@@ -5,7 +5,7 @@ import ProductsList from "./components/ProductsList";
 const getProducts = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SHOP_API_BASE_URL}/products`,
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/product`,
       { cache: "no-cache" }
     );
 

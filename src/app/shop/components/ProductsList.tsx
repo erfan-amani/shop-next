@@ -13,7 +13,7 @@ const ProductsList = ({ data }: ProductsListProps) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
         {data.map((product) => (
-          <SingleProduct key={product.id.toString()} data={product} />
+          <SingleProduct key={product._id.toString()} data={product} />
         ))}
       </div>
     </div>
