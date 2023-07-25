@@ -1,7 +1,8 @@
-import { SingleProductType } from "@/types/products";
+import { CartType, SingleProductType } from "@/types/products";
 import Image from "next/image";
 import React from "react";
 import { Star } from "@/app/components/Icons";
+import AddToCartButton from "./components/AddToCartButton";
 
 const getProduct = async (id: string) => {
   try {
@@ -18,21 +19,21 @@ const getProduct = async (id: string) => {
 
 type ItemProps = {
   params: { id: string };
-  searchParams: { search?: string };
 };
 
-const page = async ({ params, searchParams }: ItemProps) => {
+const page = async ({ params }: ItemProps) => {
   const { id } = params;
 
-  const data: SingleProductType = await getProduct(id);
+  const { product, cart }: { product: SingleProductType; cart: CartType } =
+    await getProduct(id);
 
   return (
     <div className="my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
         <div className="relative w-full before:pt-[60%] before:block">
           <Image
-            src={data.image}
-            alt={data.title}
+            src={product.image}
+            alt={product.title}
             fill
             className="object-contain"
           />
@@ -40,24 +41,22 @@ const page = async ({ params, searchParams }: ItemProps) => {
 
         <div className="flex flex-col justify-between gap-4">
           <div>
-            <h3 className="text-xl font-bold"> {data.title}</h3>
+            <h3 className="text-xl font-bold"> {product.title}</h3>
             <div className="flex gap-4 items-center">
-              <h4 className="text-xl font-normal">${data.price}</h4>
+              <h4 className="text-xl font-normal">${product.price}</h4>
               <div className="flex gap-1 items-center">
                 <Star className="text-yellow-400" weight="fill" size={15} />
                 <p className="text-xs">
-                  {data.rating.rate}
-                  <span className="opacity-70">({data.rating.count})</span>
+                  {product.rating.rate}
+                  <span className="opacity-70">({product.rating.count})</span>
                 </p>
               </div>
             </div>
 
-            <p className="text-sm opacity-75 mt-4">{data.description}</p>
+            <p className="text-sm opacity-75 mt-4">{product.description}</p>
           </div>
 
-          <button className="w-full py-2 bg-neutral-700 text-gray-50">
-            ADD TO CART
-          </button>
+          <AddToCartButton id={product._id} price={product.price} cart={cart} />
         </div>
       </div>
     </div>
