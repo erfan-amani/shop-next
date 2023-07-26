@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import React from "react";
-import { ShoppingCartSimple } from "@/app/components/Icons";
-import { store, useSelector } from "@/redux/store";
+import { useSelector } from "@/redux/store";
 import { selectIsAuth } from "@/redux/slices/userSlice/selector";
+import CartDropdown from "./CartDropdown";
 
 const Header = ({ className = "" }: { className?: String }) => {
   const isAuth = useSelector(selectIsAuth);
@@ -23,9 +23,7 @@ const Header = ({ className = "" }: { className?: String }) => {
           {isAuth ? (
             <>
               <Link href="/account">Account</Link>
-              <button>
-                <ShoppingCartSimple size={22} />
-              </button>
+              <CartDropdown />
             </>
           ) : (
             <>

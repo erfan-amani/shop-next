@@ -1,4 +1,6 @@
-export interface SingleProductType {
+import { User } from "./user";
+
+export type SingleProductType = {
   _id: string;
   title: string;
   price: number;
@@ -9,11 +11,11 @@ export interface SingleProductType {
     rate: number;
     count: number;
   };
-}
+};
 
-export interface CartType {
+export type CartType<PT = string, UT = string> = {
   _id: string;
-  product: string;
-  user: string;
+  product: PT;
+  user: UT;
   count: number;
-}
+};
